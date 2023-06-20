@@ -16,7 +16,7 @@ describe("Given I'm connected as an employee on the NewBill page", () => {
   beforeEach(() => {
     document.body.innerHTML = NewBillUI();
     Object.defineProperty(window, "localStorage", {value: localStorageMock});
-    window.localStorage.setItem("user", JSON.stringify({type: "Employee", email: "employee@test.fr"}));
+    window.localStorage.setItem("user", JSON.stringify({type: "Employee", email: "employee@test.fr", password: "employee"}));
     newBill = new NewBill({
       document,
       onNavigate: jest.fn(),
