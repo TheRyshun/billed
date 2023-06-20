@@ -1,0 +1,212 @@
+ Voici une explication du code ligne par ligne (Bills.js à 52 et 72) :
+
+- describe("When I click on the eye Icon of a Bill", () => { ... }) : 
+  Ceci est une déclaration de test qui décrit le scénario du test. 
+  Dans ce cas, le scénario est "Quand je clique sur l'icône 'œil' d'une facture".
+
+- test("Then the modal should have appeared", async () => { ... }) : 
+  Ceci est une déclaration de test spécifique à ce scénario. Elle décrit l'objectif du test, 
+  c'est-à-dire que la fenêtre modale devrait apparaître.
+
+- Document.body.innerHTML = BillsUI({ data: bills }); : 
+  Cette ligne crée une représentation du composant BillsUI avec des données de facture spécifiées, et l'insère dans le corps du document.
+
+- const newBill = new Bills({ document, onNavigate, store: mockStore, localStorage: window.localStorage }) : 
+  Une nouvelle instance de la classe Bills est créée avec les paramètres spécifiés. 
+  Cette instance est utilisée pour gérer les interactions avec les factures.
+
+- $.fn.modal = jest.fn(); : 
+  Ceci remplace la méthode jQuery modal par un faux (mock) lorsqu'elle est appelée. 
+  Cela permet de simuler le comportement de l'ouverture de la fenêtre modale.
+
+- const handleClickIconEye = jest.fn(() => { newBill.handleClickIconEye; }); : 
+  Une nouvelle fonction de simulation est créée à l'aide de jest.fn(). 
+  Cette fonction est censée simuler le clic sur l'icône "œil" et appelle newBill.handleClickIconEye.
+
+- const eyes = screen.getAllByTestId("icon-eye"); : 
+  Cette ligne récupère toutes les icônes "œil" de la page à l'aide de leur attribut de test data-testid.
+
+- const firstEye = eyes[0]; : 
+  Récupère la première icône "œil" de la liste.
+
+- firstEye.addEventListener("click", handleClickIconEye); : 
+  Ajoute un écouteur d'événements de clic sur la première icône "œil" pour appeler handleClickIconEye lorsque l'icône est cliquée.
+
+- fireEvent.click(firstEye); : 
+  Déclenche un événement de clic sur la première icône "œil".
+
+- await waitFor(() => { ... }) : 
+  Attend que la fonction de rappel asynchrone spécifiée soit évaluée avec succès.
+
+- expect($("#modalefile").find(".modal-body").innerHTML !== "").toBeTruthy(); : 
+  Vérifie que le contenu de la fenêtre modale avec l'ID modalefile n'est pas vide, 
+  en vérifiant si la propriété innerHTML de la classe .modal-body est différente de la chaîne vide. 
+  Si cette condition est vraie, le test réussit
+
+
+
+  ---------------------------------------------------------------------------------------------------------------------
+
+
+
+  Voici une explication du code ligne par ligne(Bills.js à 72 - 90) :
+
+- test("When an error occurs on API", () => { ... }) : 
+  Cette ligne déclare un test qui décrit le scénario où une erreur se produit lors de l'appel à une API.
+
+- beforeEach(() => { ... }) : 
+  Cette fonction est exécutée avant chaque test dans ce bloc. Elle configure l'environnement de test.
+
+- jest.spyOn(mockStore, "bills"); : 
+  Cette ligne utilise jest.spyOn pour espionner (spy) la méthode bills de l'objet mockStore. Cela permet de simuler le comportement de cette méthode lors des tests.
+
+- 7-13. Les lignes suivantes définissent et stockent des informations dans localStorage pour simuler un utilisateur connecté. 
+  Cela est nécessaire pour que le test puisse fonctionner correctement.
+
+- 15-19. Ces lignes créent un élément <div> avec l'ID "root" et l'ajoutent au corps du document. 
+  Cela simule l'élément racine de l'application dans lequel le test sera exécuté.
+
+- router(); : Cette ligne appelle une fonction router qui semble être responsable de la configuration des routes dans l'application. 
+  Cela permet de simuler le comportement de la navigation dans l'application.
+
+
+
+  ---------------------------------------------------------------------------------------------------------------------
+
+
+Voici une explication du code ligne par ligne (Bills.js à 94 - 100) :
+
+- test("Then bills are formated with getBills", async () => { ... }) : 
+  Cette ligne déclare un test qui décrit le scénario où les factures sont formatées à l'aide de getBills().
+
+- const container = new Bills({ document, onNavigate, store: mockStore, localStorage: window.localStorage }) : 
+  Cette ligne crée une nouvelle instance de la classe Bills avec les paramètres spécifiés. 
+  Cette instance sera utilisée pour manipuler les factures.
+
+- const getBills = jest.fn(() => container.getBills()) : 
+  Cette ligne crée une nouvelle fonction getBills en utilisant jest.fn(). 
+  Cette fonction appelle la méthode getBills() de l'instance container. 
+  Le jest.fn() permet de simuler l'appel à la méthode getBills() lors des tests.
+
+- const data = await getBills() : 
+  Cette ligne appelle la fonction getBills() créée précédemment et attend que la promesse soit résolue. 
+  Le résultat est stocké dans la variable data.
+
+- expect(data).toBeTruthy() : 
+  Cette ligne vérifie que data est une valeur vérité (truthy). 
+  Cela garantit que data n'est pas null, undefined ou une autre valeur falsy.
+
+- expect(data[0].id).toEqual(bills[0].id) : 
+  Cette ligne vérifie que l'ID de la première facture dans data est égal à l'ID de la première facture dans la variable bills. 
+  Cela permet de s'assurer que les factures sont correctement formatées et que les données sont cohérentes.
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+Voici une explication du code ligne par ligne (NewBill.js à 28 - 38) :
+
+- describe("When I select a file that is not jpg, jpeg or png", () => { ... }) : 
+  Cette ligne déclare un bloc de tests qui décrit le scénario où l'utilisateur sélectionne un fichier qui n'est pas de type jpg, jpeg ou png.
+
+- test("Then the file should be empty", () => { ... }) : 
+  Cette ligne déclare un test spécifique à ce scénario. Il décrit l'objectif du test, à savoir que le fichier devrait être vide.
+
+- const handleChangeFile = jest.fn(newBill.handleChangeFile); : 
+  Cette ligne crée une nouvelle fonction handleChangeFile en utilisant jest.fn().
+  Cette fonction est censée simuler le comportement de la fonction handleChangeFile de l'objet newBill.
+
+- const fileInput = screen.getByTestId("file"); : 
+  Cette ligne récupère l'élément d'entrée de fichier (input) avec l'attribut de test data-testid égal à "file".
+
+- fileInput.addEventListener("change", handleChangeFile); : 
+  Cette ligne ajoute un écouteur d'événements de changement à l'élément d'entrée de fichier pour appeler la fonction handleChangeFile 
+  lorsque le fichier est modifié.
+
+- const file = new File(["test"], "test.pdf"); : 
+  Cette ligne crée un objet File en utilisant le constructeur File. 
+  Le fichier simulé a un contenu "test" et un nom "test.pdf".
+
+- const event = { target: { files: [file] }}; : 
+  Cette ligne crée un objet d'événement simulé qui contient le fichier créé précédemment. 
+  Cet événement sera utilisé pour déclencher l'événement de changement de fichier.
+
+- fireEvent.change(fileInput, event); : 
+  Cette ligne déclenche l'événement de changement de fichier sur l'élément d'entrée de fichier avec l'objet d'événement simulé.
+
+- expect(handleChangeFile).toHaveReturnedWith(false); : 
+  Cette ligne vérifie que la fonction handleChangeFile a renvoyé la valeur false. 
+  Cela permet de s'assurer que le fichier est vide et que le comportement attendu est respecté.
+  
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+Voici une explication du code ligne par ligne (NewBill.js à 39 - 49) :
+
+- describe("When I select a file that is jpg, jpeg or png", () => { ... }) : 
+  Cette ligne déclare un bloc de tests qui décrit le scénario où l'utilisateur sélectionne
+  un fichier de type jpg, jpeg ou png.
+
+- test("Then the file should contain the file", () => { ... }) : 
+  Cette ligne déclare un test spécifique à ce scénario.
+  Il décrit l'objectif du test, à savoir que le fichier devrait contenir le fichier sélectionné.
+
+- const handleChangeFile = jest.fn(newBill.handleChangeFile); : 
+  Cette ligne crée une nouvelle fonction handleChangeFile en utilisant jest.fn().
+  Cette fonction est censée simuler le comportement de la fonction handleChangeFile de l'objet newBill.
+
+- const fileInput = screen.getByTestId("file"); : 
+  Cette ligne récupère l'élément d'entrée de fichier (input) avec l'attribut de test data-testid égal à "file".
+
+- fileInput.addEventListener("change", handleChangeFile); : 
+  Cette ligne ajoute un écouteur d'événements de changement à l'élément d'entrée de fichier 
+  pour appeler la fonction handleChangeFile lorsque le fichier est modifié.
+
+- const file = new File(["test"], "test.jpg"); : 
+  Cette ligne crée un objet File en utilisant le constructeur File. 
+  Le fichier simulé a un contenu "test" et un nom "test.jpg".
+
+- const event = { target: { files: [file] }}; : 
+  Cette ligne crée un objet d'événement simulé qui contient le fichier créé précédemment. 
+  Cet événement sera utilisé pour déclencher l'événement de changement de fichier.
+
+- fireEvent.change(fileInput, event); : 
+  Cette ligne déclenche l'événement de changement de fichier
+  sur l'élément d'entrée de fichier avec l'objet d'événement simulé.
+
+- expect(fileInput.files[0].name).toBe("test.jpg"); : 
+  Cette ligne vérifie que le nom du fichier contenu dans l'élément d'entrée de fichier est "test.jpg". 
+  Cela permet de s'assurer que le fichier a été correctement ajouté à l'élément d'entrée de fichier.
+  
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+Voici une explication du code ligne par ligne (NewBill.js à 50 - 56) :
+
+- test("When I submit a new bill in the form", () => { ... }) : 
+  Cette ligne déclare un test qui décrit le scénario où l'utilisateur soumet une nouvelle facture dans le formulaire.
+
+- const form = screen.getByTestId("form-new-bill"); : 
+  Cette ligne récupère l'élément du formulaire avec l'attribut de test data-testid égal à "form-new-bill".
+
+- const handleSubmit = jest.fn(newBill.handleSubmit); : 
+  Cette ligne crée une nouvelle fonction handleSubmit en utilisant jest.fn(). 
+  Cette fonction est censée simuler le comportement de la fonction handleSubmit de l'objet newBill.
+
+- form.addEventListener('submit', handleSubmit); : 
+  Cette ligne ajoute un écouteur d'événements de soumission au formulaire pour appeler la fonction handleSubmit 
+  lorsque le formulaire est soumis.
+
+- fireEvent.submit(form); : Cette ligne déclenche l'événement de soumission du formulaire.
+
+- expect(handleSubmit).toHaveBeenCalled(); : 
+  Cette ligne vérifie si la fonction handleSubmit a été appelée. 
+  Cela permet de s'assurer que le formulaire a été soumis et que la fonction a été exécutée.
