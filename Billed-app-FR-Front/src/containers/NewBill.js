@@ -29,7 +29,7 @@ export default class NewBill {
   
     if (!extension.includes(fileExtension[1])) {
       file = this.document.querySelector(`input[data-testid="file"]`).value = "";
-      //alert("Erreur : les extensions autorisées sont jpg, jpeg et png uniquement.");
+      alert("Erreur : les extensions autorisées sont jpg, jpeg et png uniquement.");
       return false;
     } else {
       this.store
